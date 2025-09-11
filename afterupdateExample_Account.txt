@@ -1,0 +1,40 @@
+/*      System.Debug('In After Update');
+        Set<id> accwebsitechanged  = new Set<Id>();
+        Map<Id, String> accWebsiteMap = new Map<Id, String>();
+        List<Contact> contoUpdate = new List<Contact>();
+        //Set<id> newaccwebsitechanged  = new Set<Id>();
+        for(Account acc : Trigger.New){
+            Account oldAcc = trigger.oldMap.get(acc.Id);
+
+            if(oldAcc.Website != acc.website){
+                accwebsitechanged.add(acc.id);
+                accWebsiteMap.put(acc.id, acc.website);
+            }
+
+            System.Debug(accwebsitechanged);
+            System.Debug(accWebsiteMap);
+            
+
+            /*if(oldAcc.Website != acc.website){
+                accWebsiteMap.put(acc.id, acc.website);
+            } 
+
+
+        }
+
+        List<Contact> cons = [Select FirstName, LastName, AccountId, Email from Contact where AccountId IN : accwebsitechanged];
+        // List<Contact> cons = [Select FirstName, LastName, AccountId, Email from Contact where AccountId IN : accWebsiteMap.keyset()];
+
+        System.Debug(cons);
+
+        For (Contact con : cons){
+            String domain = accWebsiteMap.get(con.AccountId);
+            con.Email = con.FirstName + con.LastName + '@' + domain;
+            contoUpdate.add(con);
+            System.Debug(contoUpdate);
+        }
+
+        if(contoUpdate.size() > 0){
+            //Database saveResults[] sr = Database.insert(contoUpdate, false);
+            update contoUpdate;
+        }*/

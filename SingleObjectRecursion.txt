@@ -1,0 +1,23 @@
+ //Trigger Recursion
+        //Set<id> accwebsitechanged  = new Set<Id>();
+        //Early return
+        if(AccountrecursionPrevention.preventAccRec) return;
+//        if(!AccountrecursionPrevention.preventAccRec) { 
+        AccountrecursionPrevention.preventAccRec = true;
+        List<Account> updAcc = new List<Account>();
+        Account oldAcc;
+        for (Account acc: Trigger.new){
+            oldAcc = Trigger.old.get(acc.id);
+            if(acc != oldAcc){
+                acc.Rating = 'Warm';
+            }
+            updAcc.add(acc);
+        }
+
+        try{
+            update updAcc;
+            
+        }
+        finally{
+            AccountrecursionPrevention.preventAccRec = false;
+        }

@@ -36,21 +36,21 @@ trigger AccountTrigger on Account (before insert, before delete, before update, 
     }
 
     if(Trigger.isAfter && Trigger.isUpdate){
+
         System.Debug('In After Update');
-        Set<id> accwebsitechanged  = new Set<Id>();
-        Map<Id, String> accWebsiteMap = new Map<Id, String>();
+        if(PreventAccConRecursion.accTriggerPrevent) return;
+        Set<id> accphonechanged  = new Set<Id>();
+        Map<Id, String> accPhoneMap = new Map<Id, String>();
         List<Contact> contoUpdate = new List<Contact>();
         //Set<id> newaccwebsitechanged  = new Set<Id>();
+        PreventAccConRecursion.accTriggerPrevent = true;
         for(Account acc : Trigger.New){
             Account oldAcc = trigger.oldMap.get(acc.Id);
 
-            if(oldAcc.Website != acc.website){
-                accwebsitechanged.add(acc.id);
-                accWebsiteMap.put(acc.id, acc.website);
+            if(oldAcc.Phone != acc.Phone){
+                accphonechanged.add(acc.id);
+                accPhoneMap.put(acc.id, acc.Phone);
             }
-
-            System.Debug(accwebsitechanged);
-            System.Debug(accWebsiteMap);
             
 
             /*if(oldAcc.Website != acc.website){
@@ -60,30 +60,29 @@ trigger AccountTrigger on Account (before insert, before delete, before update, 
 
         }
 
-        List<Contact> cons = [Select FirstName, LastName, AccountId, Email from Contact where AccountId IN : accwebsitechanged];
+        List<Contact> cons = [Select AccountId, Phone from Contact where AccountId IN : accphonechanged];
         // List<Contact> cons = [Select FirstName, LastName, AccountId, Email from Contact where AccountId IN : accWebsiteMap.keyset()];
 
         System.Debug(cons);
 
         For (Contact con : cons){
-            String domain = accWebsiteMap.get(con.AccountId);
-            con.Email = con.FirstName + con.LastName + '@' + domain;
+            String ph = accPhoneMap.get(con.AccountId);
+            con.Phone = ph;
             contoUpdate.add(con);
             System.Debug(contoUpdate);
         }
 
         if(contoUpdate.size() > 0){
             //Database saveResults[] sr = Database.insert(contoUpdate, false);
-            update contoUpdate;
+            try{
+                update contoUpdate;
+            }
+            finally{
+                PreventAccConRecursion.accTriggerPrevent = false;
+            }
+            
         }
 
-
-
-
-
-
-
-
-    }
+    } 
 
 }

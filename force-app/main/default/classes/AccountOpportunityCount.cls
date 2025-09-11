@@ -13,12 +13,13 @@ public with sharing class AccountOpportunityCount {
             Integer c;
             List<Account> accUpd = new List<Account>();
             for(Id acId : accountIds){
-                    if(accoppCount.containsKey(acId)){
+                 /*   if(accoppCount.containsKey(acId)){
                         c = accoppCount.get(acId);
                     }
                     else{
                         c=0;
-                    }       
+                    } */
+                    c = accoppCount.containsKey(acId) ?  accoppCount.get(acId) : 0;       // Ternary
                     
                     accUpd.add(new Account(Id = acId, Opportunity_Count__c=c));
             }

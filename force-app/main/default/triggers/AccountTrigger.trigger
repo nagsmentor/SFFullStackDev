@@ -1,4 +1,11 @@
-trigger AccountTrigger on Account (before insert, before delete, before update, after update) {
+trigger AccountTrigger on Account (before insert, before delete, before update, after update, after insert) {
+    
+    If(Trigger.IsAfter && Trigger.IsInsert){
+        for(Account a : Trigger.New){
+            System.enqueueJob(new ActivateAccountQueue(a.id));
+        }
+    }
+
     
     If(Trigger.IsBefore && Trigger.IsInsert){
         AccountTriggerHandler.beforeAccInsert(Trigger.New);

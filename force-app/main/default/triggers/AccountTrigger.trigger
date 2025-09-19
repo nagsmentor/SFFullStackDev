@@ -1,9 +1,32 @@
 trigger AccountTrigger on Account (before insert, before delete, before update, after update, after insert) {
     
     If(Trigger.IsAfter && Trigger.IsInsert){
+     /*   List<Onboarding_Event__e> lstPE = new List<Onboarding_Event__e>();
         for(Account a : Trigger.New){
-            System.enqueueJob(new ActivateAccountQueue(a.id));
+            //System.enqueueJob(new ActivateAccountQueue(a.id));
+            Onboarding_Event__e oPE = new Onboarding_Event__e();
+            oPE.AccountId__c = a.Id;
+            oPE.OwnerId__c = a.OwnerId;
+            oPE.TaskDescription__c = 'Please start Onboarding for the Account ' + a.Name;
+            lstPE.add(oPE);
         }
+        if(lstPE.size() > 0){
+            List<Database.SaveResult> results = EventBus.publish(lstPE); //Database.Insert
+
+            for(Database.SaveResult sr: results){
+                if(sr.isSuccess()){
+                    System.Debug('Event Publish Successfully with Id: ' + sr.getId());
+                }
+                else {
+                    for (Database.Error err: sr.getErrors()){
+                        System.Debug('Failed with reason: ' + err.getMessage());
+                    }
+                }
+            }
+        }*/
+
+       OpenAINameFactsFutureSample.generateFacts(Trigger.New);
+
     }
 
     

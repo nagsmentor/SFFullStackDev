@@ -1,0 +1,255 @@
+{
+	"info": {
+		"_postman_id": "9f00c66d-d735-4084-afa9-39b2b453fc25",
+		"name": "SalesforceRESTIntegration",
+		"description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "48580536",
+		"_collection_link": "https://nagsmentor-4782880.postman.co/workspace/Nagarajan's-Workspace~cd32d8ea-a436-4919-81eb-f28526f80ca8/collection/48580536-9f00c66d-d735-4084-afa9-39b2b453fc25?action=share&source=collection_link&creator=48580536"
+	},
+	"item": [
+		{
+			"name": "Get data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						]
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+			},
+			"response": []
+		},
+		{
+			"name": "Post data",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);",
+							"});",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "3MVG9rZjd7MXFdLgWnICXIFbB53hdRRmn8kTq_AO0xwf3z7jjkqAb_4wDXTj8oq0CfbtV4efLPLdk5dAakkoQ",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "BCD178663B4E6869384BEE6D804AA54276B138B31620C12C0A967735F907D90F",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://orgfarm-d0cd2059b4-dev-ed.develop.my.salesforce.com/services/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"orgfarm-d0cd2059b4-dev-ed",
+						"develop",
+						"my",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"oauth2",
+						"token"
+					]
+				},
+				"description": "This is a POST request, submitting data to an API via the request body. This request submits JSON data, and the data is reflected in the response.\n\nA successful POST request typically returns a `200 OK` or `201 Created` response code."
+			},
+			"response": []
+		},
+		{
+			"name": "Create Account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 00DgK000007oZ4z!AQEAQEbUpinol7CtrQfTwnV5iPVS9Y51f6WF5PAAMzXbDEJItuxJ8zkBrd9cUjD5nMSzEFSoh37TKLTLOnSUJFoaXr7IgQCL",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"Name\" : \"Burlington Textiles Corp of America\",\r\n  \"Active__c\" : \"Yes\",\r\n  \"Site\" : \"India\",\r\n  \"AnnualRevenue\" : \"10\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://orgfarm-d0cd2059b4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account/",
+					"protocol": "https",
+					"host": [
+						"orgfarm-d0cd2059b4-dev-ed",
+						"develop",
+						"my",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"data",
+						"v60.0",
+						"sobjects",
+						"Account",
+						""
+					]
+				},
+				"description": "Create Account"
+			},
+			"response": []
+		},
+		{
+			"name": "Query Account",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 00DgK000007oZ4z!AQEAQEbUpinol7CtrQfTwnV5iPVS9Y51f6WF5PAAMzXbDEJItuxJ8zkBrd9cUjD5nMSzEFSoh37TKLTLOnSUJFoaXr7IgQCL",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://orgfarm-d0cd2059b4-dev-ed.develop.my.salesforce.com/services/data/v60.0/sobjects/Account/001gK00000LG9OGQA1",
+					"protocol": "https",
+					"host": [
+						"orgfarm-d0cd2059b4-dev-ed",
+						"develop",
+						"my",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"data",
+						"v60.0",
+						"sobjects",
+						"Account",
+						"001gK00000LG9OGQA1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryAccount with SOQL",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer 00DgK000007oZ4z!AQEAQEbUpinol7CtrQfTwnV5iPVS9Y51f6WF5PAAMzXbDEJItuxJ8zkBrd9cUjD5nMSzEFSoh37TKLTLOnSUJFoaXr7IgQCL",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://orgfarm-d0cd2059b4-dev-ed.develop.my.salesforce.com/services/data/v60.0/query?q=SELECT Id, Name from Account where AnnualRevenue>10000",
+					"protocol": "https",
+					"host": [
+						"orgfarm-d0cd2059b4-dev-ed",
+						"develop",
+						"my",
+						"salesforce",
+						"com"
+					],
+					"path": [
+						"services",
+						"data",
+						"v60.0",
+						"query"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "SELECT Id, Name from Account where AnnualRevenue>10000"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCase With Apex",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Authorization",
+						"value": "Bearer 00DgK000007oZ4z!AQEAQEbUpinol7CtrQfTwnV5iPVS9Y51f6WF5PAAMzXbDEJItuxJ8zkBrd9cUjD5nMSzEFSoh37TKLTLOnSUJFoaXr7IgQCL",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"accname\" : \"Burlington Textiles Corp of America\",\r\n  \"subject\" : \"Testing a case 2\",\r\n  \"priority\" : \"High\",\r\n  \"Description\" : \"This is a case created from external system\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "CreateCase With Apex",
+					"host": [
+						"CreateCase With Apex"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

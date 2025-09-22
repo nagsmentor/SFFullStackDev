@@ -69,12 +69,12 @@
 						},
 						{
 							"key": "client_id",
-							"value": "3MVG9rZjd7MXFdLgWnICXIFbB53hdRRmn8kTq_AO0xwf3z7jjkqAb_4wDXTj8oq0CfbtV4efLPLdk5dAakkoQ",
+							"value": "",
 							"type": "text"
 						},
 						{
 							"key": "client_secret",
-							"value": "BCD178663B4E6869384BEE6D804AA54276B138B31620C12C0A967735F907D90F",
+							"value": "",
 							"type": "text"
 						}
 					]

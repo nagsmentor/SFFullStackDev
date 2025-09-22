@@ -111,7 +111,7 @@
 					},
 					{
 						"key": "Authorization",
-						"value": "Bearer 00DgK000007oZ4z!AQEAQEbUpinol7CtrQfTwnV5iPVS9Y51f6WF5PAAMzXbDEJItuxJ8zkBrd9cUjD5nMSzEFSoh37TKLTLOnSUJFoaXr7IgQCL",
+						"value": "Bearer Access_token",
 						"type": "text"
 					}
 				],

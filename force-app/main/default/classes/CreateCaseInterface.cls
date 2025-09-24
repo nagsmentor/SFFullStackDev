@@ -51,7 +51,7 @@ Case c = new Case();
             CreatecaseResponse out = new CreatecaseResponse();
             out.message = 'Case has been created successfully';
             out.accountId = c.AccountId;
-            out.caseNumber = c.CaseNumber;
+            out.caseNumber = c.Id;
 
             res.statusCode = 200;
             res.responseBody = Blob.valueof(JSON.serialize(out));

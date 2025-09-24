@@ -28,11 +28,13 @@ global with sharing class CreateCaseInterface {
         catch(Exception e){
             res.StatusCode = 400;
             res.responseBody = Blob.valueOf('{"message":"Issue when parsing JSON"}');
+            return;
         }
         try{
         if(String.isBlank(payload.subject) || String.isBlank(payload.accname)){
             res.StatusCode = 400;
             res.responseBody = Blob.valueOf('{"message":"Subject AND AccountName are required"}');
+            return;
         }
 
         List<Account> foundAcc = [Select Id, Name from Account where Name = :payload.accname LIMIT 1];
@@ -40,8 +42,9 @@ global with sharing class CreateCaseInterface {
         If(foundAcc.size() <=0 ){
             res.StatusCode = 400;
             res.responseBody = Blob.valueOf('{"message":"Account Name is not found"}');
+            return;
         }
-Case c = new Case();
+            Case c = new Case();
             c.subject = payload.subject;
             c.priority = payload.priority;
             c.priority = 'Case created from external';

@@ -1,0 +1,33 @@
+<template>
+    <h1> Welcome to first LWC</h1>
+    <lightning-input 
+      type="text"
+      label="Enter your Name"
+      value={name}
+      placeholder="Please enter your name"
+      onchange = {handlenamechange}
+    ></lightning-input>
+
+    <template if:true={hasname}>
+        <p> Hello, {name}</p>
+    </template>
+    
+    <ul>
+        <li>Item1</li>
+        <li>Item2</li>
+    </ul>
+    
+    <ul>
+    <template for:each={courses} for:item="course">
+        <li key={course.id}>
+            {course.name} - {course.level} - {course.duration}
+        </li>
+    </template>
+    </ul>
+
+    <lightning-button 
+      variant="brand"
+      label="Click Me" 
+      onclick={showToast} 
+    ></lightning-button>
+</template>

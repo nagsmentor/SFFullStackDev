@@ -5,3 +5,7 @@ h1{
 .h1color{
     color: chartreuse;
 }
+
+/*#h1blue{
+    color: blue;
+} Not allowed in LWC */ 

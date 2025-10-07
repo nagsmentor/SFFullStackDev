@@ -1,0 +1,51 @@
+<template>
+    <lightning-card icon-name="standard:account" variant="base">
+      <div slot="title" class = "title">
+          Search Courses
+      </div>
+      <div slot="actions">
+    
+      </div>
+      <div slot="footer">
+    
+      </div>
+      <div class = "toolbar">
+        <lightning-combobox
+        name="level"
+        label="Search by Level"
+        value={level}
+        placeholder="Select Level"
+        options={options}
+        onchange={handleChange} 
+        ></lightning-combobox>
+
+        <lightning-input 
+          class = "search"
+          type="text"
+          label="Search by Name"
+          value="query"
+          placeholder="Enter a course name to search"
+          onchange={handlequerychange}
+        ></lightning-input>
+
+        <lightning-button 
+          variant="brand"
+          label="Clear" 
+          onclick={clearquery} 
+        ></lightning-button>
+
+        <ul class="course-list slds-m-top_small">
+            <template for:each={filteredresults} for:item="course">
+                <li key={course.id} class="course-item">
+                    <span class = "pill">{course.name}</span>
+                    <span class = "pill">{course.level}</span>
+                    <span class = "pill">{course.duration}</span>
+                </li>
+            </template>
+        </ul>
+
+        <div class = "count"> Displaying {filteredcount} out of {totalcount} records</div>
+
+       </div>
+    </lightning-card>
+</template>

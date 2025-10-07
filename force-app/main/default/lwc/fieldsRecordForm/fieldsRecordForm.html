@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title="Fields Record Form">
+    <lightning-record-form 
+    object-api-name="Account" 
+    fields={fields}
+    mode="edit"
+    density="comfy"
+    columns="3"
+    onsuccess = {handleSuccess}
+    onerror = {handleError}>
+    </lightning-record-form>
+    </lightning-card>
+</template>

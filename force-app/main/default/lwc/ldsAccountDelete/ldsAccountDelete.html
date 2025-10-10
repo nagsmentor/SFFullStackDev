@@ -1,0 +1,13 @@
+<template>
+    <lightning-card title = "LDS Account Delete" icon-name="standard:account">
+        <lightning-button label="Delete Account" variant="destructive" onclick={handledelete} disabled={isDeleting}>
+
+        </lightning-button>
+    
+    
+    <template if:true={isDeleting}>
+        <lightning-spinner size="small" alternative-text="Deleting In Progress"></lightning-spinner>
+    </template>
+    </lightning-card>
+
+</template>

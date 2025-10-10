@@ -1,0 +1,20 @@
+<template>
+    <lightning-card title="LDS Account Viewer" icon-name="standard:account">
+        <template if:true={hasRecord}>
+        <div class="slds-p-around_small">
+             <p><b>Name:</b> {name}<br></p>
+             <p><b>Phone:</b> {phone} <br></p>
+             <p><b>Annual Revenue:</b> {annualrevenue}<br></p>
+             <p><b>Industry:</b> {industry} <br></p>
+             <lightning-button label="open Record" onclick={openrecord}></lightning-button>
+
+        </div>
+        </template>
+
+        <template if:false={hasRecord}>
+            <b>No Account Records Found</b>
+        </template>
+
+    </lightning-card>
+    
+</template>

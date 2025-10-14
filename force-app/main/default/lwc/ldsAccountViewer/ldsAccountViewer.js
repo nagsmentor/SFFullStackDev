@@ -40,10 +40,18 @@ export default class LdsAccountViewer extends NavigationMixin(LightningElement) 
         return this.record && this.record.data;
     }
 
-    openrecord(){
+    async openrecord(){
         if(!this.recordId) {return;}
+        const url = await this[NavigationMixin.GenerateUrl]({
+            type: 'standard__recordPage',
+            attributes: { recordId: this.recordId,
+                objectApiName: 'Account',
+                actionName:'view' }
+            });
+        console.log('Record URL:', url);
+        
         this[NavigationMixin.Navigate]({
-            type: 'standard__recordpage',
+            type: 'standard__recordPage',
             attributes:{
                 recordId: this.recordId,
                 objectApiName: 'Account',

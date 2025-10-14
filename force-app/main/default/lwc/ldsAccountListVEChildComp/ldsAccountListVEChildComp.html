@@ -1,0 +1,19 @@
+<template>
+    <lightning-card title="LDS Account List" icon-name="standard:account">
+
+        <lightning-datatable key-field="Id" data={accounts} columns={fields} onrowaction={handleRowAction}>
+
+        </lightning-datatable>
+
+    </lightning-card>
+    
+    <template if:true={selectedRowId}>
+        <lightning-card title = "Edit Record">
+        <c-lds-account-update record-id = {selectedRowId}></c-lds-account-update>
+        </lightning-card>
+    </template>
+    
+
+
+    
+</template>

@@ -2,11 +2,14 @@ import { LightningElement, track, wire } from 'lwc';
 import { getListUi } from 'lightning/uiListApi';
 import ACCOUNT_OBJECT from '@salesforce/schema/Account';
 import {NavigationMixin} from 'lightning/navigation';
+import LdsAccountUpdateModal from 'c/ldsAccountUpdateModal';
 
-export default class LdsAccountList extends NavigationMixin(LightningElement) {
+export default class ldsAccountListVEModal extends NavigationMixin(LightningElement) {
 
     @track accounts;
     @track error;
+    selectedRowId;
+    wiredlistResult;
     
     fields = [
         {label: 'Name', fieldName: 'Name', type:'text'},
@@ -17,7 +20,8 @@ export default class LdsAccountList extends NavigationMixin(LightningElement) {
             type: 'action',
             typeAttributes: {
                 rowActions: [
-                    {label: 'Display', name:'display'}
+                    {label: 'Display', name:'display'},
+                    {label: 'Edit', name:'edit'}
                 ]
             }
 
@@ -30,7 +34,9 @@ export default class LdsAccountList extends NavigationMixin(LightningElement) {
     })
 
     
-    listViewHandler({data, error}){
+    listViewHandler(listResult){
+        this.wiredlistResult = listResult;
+        const {data, error} = listResult;
         if(data){
             this.error = undefined;
             this.accounts = data.records.records.map(rec => ({
@@ -48,9 +54,11 @@ export default class LdsAccountList extends NavigationMixin(LightningElement) {
         }
     }
 
-    handleView(event){
+    async handleRowAction(event){
+        const evtName = event.detail.action.name;
         const row = event.detail.row;
-        this[NavigationMixin.Navigate](
+        if(evtName == 'display'){
+            this[NavigationMixin.Navigate](
             {
                 type: 'standard__recordPage',
                 attributes: {
@@ -59,6 +67,29 @@ export default class LdsAccountList extends NavigationMixin(LightningElement) {
                 }
             }
         );
+        }
+        else if(evtName == 'edit'){
+            const result = await LdsAccountUpdateModal.open(
+                {
+                    size: 'medium',
+                    description: 'Edit Account in Modal',
+                    recordId: row.Id
+
+                }
+            );
+
+            if(result == 'updated'){
+                await refreshApex(this.wiredlistResult);
+                this.dispatchEvent(new ShowToastEvent(
+                    {
+                        title: 'Account Updated Modal',
+                        message: 'Changes Saved',
+                        variant: 'success'
+                    }
+                ));
+            }
+        }
+        
 
     }
 

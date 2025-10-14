@@ -1,7 +1,7 @@
 <template>
     <lightning-card title = "LDS Account Update" icon-name="standard:account">
         <lightning-input required label="Account Name" value={name} onchange={onname} type="text"></lightning-input>
-        <lightning-input required label="Active" value={active} onchange={onactive} type="text"></lightning-input>
+        <lightning-combobox required label="Active" value={active} onchange={onactive} options = {activeOptions}></lightning-combobox>
         <lightning-input required label="Annual Revenue" value={ar} onchange={onar} type="number"></lightning-input>
         <lightning-input required label="Account Site" value={site} onchange={onsite} type="text"></lightning-input>
 

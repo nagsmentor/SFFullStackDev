@@ -3,10 +3,11 @@ import { getListUi } from 'lightning/uiListApi';
 import ACCOUNT_OBJECT from '@salesforce/schema/Account';
 import {NavigationMixin} from 'lightning/navigation';
 
-export default class LdsAccountList extends NavigationMixin(LightningElement) {
+export default class ldsAccountListVEChildComp extends NavigationMixin(LightningElement) {
 
     @track accounts;
     @track error;
+    selectedRowId;
     
     fields = [
         {label: 'Name', fieldName: 'Name', type:'text'},
@@ -17,7 +18,8 @@ export default class LdsAccountList extends NavigationMixin(LightningElement) {
             type: 'action',
             typeAttributes: {
                 rowActions: [
-                    {label: 'Display', name:'display'}
+                    {label: 'Display', name:'display'},
+                    {label: 'Edit', name:'edit'}
                 ]
             }
 
@@ -48,9 +50,11 @@ export default class LdsAccountList extends NavigationMixin(LightningElement) {
         }
     }
 
-    handleView(event){
+    handleRowAction(event){
+        const evtName = event.detail.action.name;
         const row = event.detail.row;
-        this[NavigationMixin.Navigate](
+        if(evtName == 'display'){
+            this[NavigationMixin.Navigate](
             {
                 type: 'standard__recordPage',
                 attributes: {
@@ -59,6 +63,11 @@ export default class LdsAccountList extends NavigationMixin(LightningElement) {
                 }
             }
         );
+        }
+        else if(evtName == 'edit'){
+            this.selectedRowId = row.Id;
+        }
+        
 
     }
 

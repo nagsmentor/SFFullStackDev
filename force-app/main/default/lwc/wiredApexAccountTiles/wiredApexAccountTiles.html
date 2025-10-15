@@ -3,7 +3,7 @@
 
         <div class="tile-container">
             <template for:each={accounts} for:item="acc"> <!-- //for( acc : accounts) -->
-                <div key={acc.id}>
+                <div class = {acc.tileclass} key={acc.id}>
                     <p>{acc.Name}</p>
                     <p>{acc.AnnualRevenue}</p>
                     <p>{acc.Site}</p>

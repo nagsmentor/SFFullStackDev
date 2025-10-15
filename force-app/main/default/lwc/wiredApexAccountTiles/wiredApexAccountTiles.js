@@ -9,7 +9,10 @@ export default class WiredApexAccountTiles extends LightningElement {
     @wire(getAccounts)
     wiredAccounts({data, error}){
         if(data){
-            this.accounts = data;
+            this.accounts = data.map(acc => ({
+                ...acc,
+                tileclass: this.computeTileClass(acc)
+            }));
             this.error = undefined;
         }
         else if (error){
@@ -18,15 +21,15 @@ export default class WiredApexAccountTiles extends LightningElement {
         }
     }
 
-    getTileclass(account){
+    computeTileClass(account){
         if(account.Active__c == 'Yes'){
-            return 'tile green-border';
+            return 'greentile';
         }
         else if(account.Active__c == 'No'){
-            return 'tile red-border';
+            return 'redtile';
         }
         else {
-            return 'tile grey-border';
+            return 'greytile';
         }
 
     }

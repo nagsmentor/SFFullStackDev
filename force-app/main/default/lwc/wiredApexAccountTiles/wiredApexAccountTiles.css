@@ -4,28 +4,32 @@
     gap: 10px;
 }
 
-.tile {
+.greentile {
     width: 220px;
     padding: 10px;
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.2);
-    background-color: white;
+    box-shadow: 0 0 5px rgba(18, 148, 11, 0.903);
+    background-color: rgb(252, 253, 248);
+}
+
+.redtile {
+    width: 220px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(246, 70, 5, 0.903);
+    background-color: rgb(252, 253, 248);
+}
+
+.greytile {
+    width: 220px;
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 0 5px rgba(156, 159, 156, 0.936);
+    background-color: rgb(252, 253, 248);
 }
 
 .title {
     font-weight: bold;
     font-size: 16px;
     color: #032D60;
-}
-
-.green-border {
-    border: 2px solid #28a745;
-}
-
-.red-border {
-    border: 2px solid #dc3545;
-}
-
-.grey-border {
-    border: 2px solid #6c757d;
 }

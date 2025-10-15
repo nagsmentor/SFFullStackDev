@@ -1,0 +1,16 @@
+<template>
+    <lightning-card class = "title" title="Wired Account Tiles">
+
+        <div class="tile-container">
+            <template for:each={accounts} for:item="acc"> <!-- //for( acc : accounts) -->
+                <div key={acc.id}>
+                    <p>{acc.Name}</p>
+                    <p>{acc.AnnualRevenue}</p>
+                    <p>{acc.Site}</p>
+                    <p>{acc.Active__c}</p>
+                </div>
+            </template>
+        </div>
+    </lightning-card>
+    
+</template>

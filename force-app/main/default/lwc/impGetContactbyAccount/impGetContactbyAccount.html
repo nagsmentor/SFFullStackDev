@@ -1,0 +1,17 @@
+<template>
+    <lightning-card class = "title" title="Imperative Contact By Account">
+        <lightning-button label="Show Contacts" onclick = {showContacts}>
+
+        </lightning-button>
+        <div class="tile-container">
+            <template for:each={contacts} for:item="con"> <!-- //for( acc : accounts) -->
+                <lightning-card key={con.id}>
+                    <p>{con.FirstName}</p>
+                    <p>{con.LastName}</p>
+                    <p>{con.Email}</p>
+                </lightning-card>
+            </template>
+        </div>
+    </lightning-card>
+    
+</template>

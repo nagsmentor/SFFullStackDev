@@ -91,8 +91,4 @@ export default class LdsAccountUpdate extends NavigationMixin(LightningElement) 
         this.dispatchEvent(new CustomEvent('xyz'));
 
     }
-
-    
-    
-
 }

@@ -1,0 +1,51 @@
+<template>
+    <lightning-card title="Client Side Search with Inline Edit And Pagination" icon-name="custom:custom63">
+
+        <lightning-input
+            type="search"
+            label="Search"
+            placeholder="Enter the search term"
+            onchange={handleChange}>
+        </lightning-input>
+
+        <template if:true={error}>
+            <h1> Error Loading Accounts </h1>
+        </template>
+
+        <template if:true={accounts}>
+            <lightning-datatable
+            key-field="Id"
+            data={pageRows}
+            columns={fields}
+            hide-checkbox-column
+            show-row-number-column
+            draft-values={draftValues}
+            onsave={handleSave}
+            is-loading={isLoading}>
+            
+            </lightning-datatable>
+
+            <lightning-combobox
+                name="pageSize"
+                label="Rows per page"
+                value={pageSize}
+                placeholder="Rows per page"
+                options={pageSizeOptions}
+                onchange={handlePageSizeChange}>
+            </lightning-combobox>
+
+            <span>Showing {rangeStart}–{rangeEnd} of {totalItems}</span><br/>
+            <span>Page { _safePageNumber } of { totalPages }</span><br/>
+
+            <lightning-button-group>
+                <lightning-button label="« First" onclick={handleFirst} disabled={disablePrev}></lightning-button>
+                <lightning-button label="<Prev" onclick={handlePrev} disabled={disablePrev}></lightning-button>
+                <lightning-button label="Next>" onclick={handleNext} disabled={disableNext}></lightning-button>
+                <lightning-button label="Last »" onclick={handleLast} disabled={disableNext}></lightning-button>
+            </lightning-button-group>
+
+        </template>
+    
+    </lightning-card>
+    
+</template>

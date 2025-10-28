@@ -1,0 +1,21 @@
+<template>
+    <lightning-card title="Client Side Search" icon-name="custom:custom63">
+
+        <lightning-input
+            type="search"
+            label="search"
+            placeholder="Enter the search term"
+            onchange={handleChange}>
+        </lightning-input>
+
+        <lightning-datatable
+        key-field="Id"
+        data={filteredAccounts}
+        columns={fields}
+        hide-checkbox-column
+        show-row-number-column>
+        </lightning-datatable>
+    
+    </lightning-card>
+    
+</template>

@@ -1,0 +1,31 @@
+<template>
+    <lightning-card title="Client Side Search with Inline Edit" icon-name="custom:custom63">
+
+        <lightning-input
+            type="search"
+            label="Search"
+            placeholder="Enter the search term"
+            onchange={handleChange}>
+        </lightning-input>
+
+        <template if:true={error}>
+            <h1> Error Loading Accounts </h1>
+        </template>
+
+        <template if:true={accounts}>
+            <lightning-datatable
+            key-field="Id"
+            data={filteredAccounts}
+            columns={fields}
+            hide-checkbox-column
+            show-row-number-column
+            draft-values={draftValues}
+            onsave={handleSave}
+            is-loading={isLoading}>
+            
+            </lightning-datatable>
+        </template>
+    
+    </lightning-card>
+    
+</template>

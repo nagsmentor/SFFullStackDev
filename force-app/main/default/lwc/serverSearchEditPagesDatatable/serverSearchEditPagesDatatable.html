@@ -1,0 +1,64 @@
+<template>
+  <lightning-card title="Server-side Account Search (Inline Edit + Pagination)" icon-name="standard:account">
+    <div class="slds-p-around_medium slds-grid slds-gutters slds-wrap">
+      <div class="slds-col slds-size_1-of-1 slds-large-size_2-of-3">
+        <lightning-input
+          type="search"
+          label="Search Accounts"
+          value={searchTerm}
+          placeholder="Type to search by Name / Site / Active"
+          onchange={handleSearchChange}
+        ></lightning-input>
+      </div>
+
+      <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-3 slds-m-top_small slds-large-m-top_none">
+        <lightning-combobox
+          name="pageSize"
+          label="Rows per page"
+          value={pageSize}
+          options={pageSizeOptions}
+          onchange={handlePageSizeChange}
+        ></lightning-combobox>
+      </div>
+    </div>
+
+    <template if:true={isLoading}>
+      <div class="slds-p-horizontal_medium slds-p-bottom_small">
+        <lightning-spinner alternative-text="Loading" size="small"></lightning-spinner>
+      </div>
+    </template>
+
+    <lightning-datatable
+      key-field="Id"
+      data={accounts}
+      columns={columns}
+      hide-checkbox-column
+      show-row-number-column
+      draft-values={draftValues}
+      onsave={handleSave}
+    >
+    </lightning-datatable>
+
+    <template if:true={error}>
+      <div class="slds-p-around_medium slds-text-color_error">
+        {error}
+      </div>
+    </template>
+
+    <!-- Pagination footer -->
+    <div class="slds-p-around_medium slds-grid slds-grid_align-spread slds-wrap">
+      <div class="slds-col slds-m-bottom_x-small">
+        <span>Showing {rangeStart}–{rangeEnd} of {totalItems}</span>
+        <span class="slds-m-left_medium">Page {pageNumber} / {totalPages}</span>
+      </div>
+      <div class="slds-col slds-m-bottom_x-small">
+        <lightning-button-group>
+          <lightning-button label="First" onclick={goFirst} disabled={isFirstPage}></lightning-button>
+          <lightning-button label="Prev" onclick={goPrev} disabled={isFirstPage}></lightning-button>
+          <lightning-button label="Next" onclick={goNext} disabled={isLastPage}></lightning-button>
+          <lightning-button label="Last" onclick={goLast} disabled={isLastPage}></lightning-button>
+        </lightning-button-group>
+      </div>
+    </div>
+  </lightning-card>
+</template>

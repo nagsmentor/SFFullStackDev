@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningMessageChannel xmlns="http://soap.sforce.com/2006/04/metadata">
+  <masterLabel>Contact View</masterLabel>
+  <isExposed>true</isExposed>
+  <description>Publishes selected contact Id</description>
+  <lightningMessageFields>
+    <fieldName>contactId</fieldName>
+    <description>Selected Contact Id</description>
+  </lightningMessageFields>
+</LightningMessageChannel>

@@ -8,7 +8,7 @@ export default class ChildLifecycleDemo extends LightningElement {
 
     renderedCallback(){
         console.log('Child: Rendered Callback');
-        throw new Error('Error thrown from Rendered Callback Child');
+       // throw new Error('Error thrown from Rendered Callback Child');
     }
 
     connectedCallback(){

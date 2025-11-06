@@ -1,0 +1,20 @@
+<template>
+  <lightning-card title="Contact Details (Subscriber)" icon-name="standard:contact">
+    <div class="slds-p-around_medium">
+      <template if:true={contactId}>
+        <lightning-record-view-form record-id={contactId} object-api-name="Contact">
+          <div class="slds-grid slds-wrap slds-gutters">
+            <div class="slds-col slds-size_1-of-1"><lightning-output-field field-name="Name"></lightning-output-field></div>
+            <div class="slds-col slds-size_1-of-2"><lightning-output-field field-name="Title"></lightning-output-field></div>
+            <div class="slds-col slds-size_1-of-2"><lightning-output-field field-name="Email"></lightning-output-field></div>
+            <div class="slds-col slds-size_1-of-2"><lightning-output-field field-name="Phone"></lightning-output-field></div>
+            <div class="slds-col slds-size_1-of-2"><lightning-output-field field-name="AccountId"></lightning-output-field></div>
+          </div>
+        </lightning-record-view-form>
+      </template>
+      <template if:false={contactId}>
+        <div class="slds-text-color_weak">Click “View” on a contact to see details here.</div>
+      </template>
+    </div>
+  </lightning-card>
+</template>

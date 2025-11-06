@@ -1,0 +1,27 @@
+<template>
+    <lightning-card title="Child Contacts" icon-name="standard:contact">
+
+        <template if:true={contacts.length}> 
+            <lightning-datatable
+                key-field = "Id"
+                data={contacts}
+                columns={fields}
+                hide-checkbox-column
+                show-row-number-column
+                onrowaction={handleRowAction}>
+            
+
+            </lightning-datatable>
+        </template>
+
+        <template if:true={showEmpty}>
+            <div>No Contacts for this Account</div>
+        </template>
+
+        <template if:true={error}>
+            <div>{error}</div>
+        </template>
+
+    </lightning-card>
+    
+</template>

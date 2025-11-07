@@ -4,7 +4,7 @@
   <isExposed>true</isExposed>
   <description>Publishes selected contact Id</description>
   <lightningMessageFields>
-    <fieldName>contactId</fieldName>
+    <fieldName>mccontactId</fieldName>
     <description>Selected Contact Id</description>
   </lightningMessageFields>
 </LightningMessageChannel>

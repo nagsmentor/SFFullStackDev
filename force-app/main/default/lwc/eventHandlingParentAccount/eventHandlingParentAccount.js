@@ -3,8 +3,9 @@ import getAccounts from '@salesforce/apex/AccountController.getAccounts';
 
 export default class EventHandlingParentAccount extends LightningElement {
     selectedAccountId;
-    accountOptions = [];
-    selectedContactEmail;
+    accountOptions = []; //[{label: 'Name', value: 'Id'}];
+    selectedEmail;
+    selectedContactId;
 
     @wire(getAccounts)
     wiredAccounts({data, error}){
@@ -14,16 +15,18 @@ export default class EventHandlingParentAccount extends LightningElement {
         else if(error){
             console.error(error);
         }
+
     }
 
     handleAccountChange(e){
         this.selectedAccountId = e.detail.value;
-        console.log('Selected Id ',this.selectedAccountId);
+        console.log('Selected Id ', this.selectedAccountId);
     }
 
     handleViewContact(e){
-        this.selectedContactEmail = e?.detail?.email;
-
+        this.selectedEmail = e?.detail?.email;
+        this.selectedContactId = e?.detail?.conId;
     }
+
 
 }

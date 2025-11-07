@@ -1,25 +1,27 @@
-import { LightningElement, wire, track, api } from 'lwc';
+import { LightningElement, api, wire, track } from 'lwc';
 import getContactbyAccount from '@salesforce/apex/AccountController.getContactbyAccount';
-import{publish, MessageContext, APPLICATION_SCOPE} from 'lightning/messageService';
 import CONTACT_VIEW from '@salesforce/messageChannel/ContactView__c';
-
+import { publish, MessageContext} from 'lightning/messageService';  
 
 export default class EventHandlingChildContacts extends LightningElement {
+
     @api accountId;
     @track contacts = [];
-    @track error; 
+    @track error;
+    @track showEmpty = false;
 
     fields = [
-        {label:'First Name',fieldName:'FirstName',type:'text'},
-        {label: 'Last Name', fieldName:'LastName', type:'text'},
+        {label: 'First Name', fieldName: 'FirstName', type:'text'},
+        {label: 'Last Name', fieldName: 'LastName', type:'text'},
         {
-            type: 'action',
-            typeAttributes:{rowActions:[{label: 'Select', name: 'view'}]}
+            type:'action',
+            typeAttributes:{rowActions:[{label:'Select', name:'view'},{label:'Delete', name:'delete'}]}
         }
     ];
 
     @wire(MessageContext) messageContext;
-    @wire(getContactbyAccount, {accid: '$accountId'})
+
+    @wire(getContactbyAccount, {accid : '$accountId'})
     wiredContacts({data,error}){
 
         if(data){
@@ -31,26 +33,31 @@ export default class EventHandlingChildContacts extends LightningElement {
             this.error = error?.body?.message || 'Error Loading Contacts';
             console.error(error);
         }
-
-
         
     }
 
-    handleRowAction(event){
-        const {name} = event.detail.action;
-        const row = event.detail.row;
+    handleRowAction(e){
+        const {name} = e.detail.action;
+        const row = e.detail.row;
 
-        if(name = 'view'){
-            this.dispatchEvent(new CustomEvent('viewcontact',{
-                detail:{email: row.Email}
-            }));
+        if(name='view')
+        {
+            this.dispatchEvent(new CustomEvent('viewcontact',
+            {detail:{email:row.Email, conId:row.Id}
+            }
+            ));
 
-            publish(this.messageContext,CONTACT_VIEW,{contactId: row.Id});
+            publish(this.messageContext, CONTACT_VIEW, {mccontactId: row.Id});
+
+            console.log('published ' , row.Id);
         }
+        else if(name = 'delete'){
+
+        }
+
     }
 
     get showEmpty(){
-            return this.contacts.length == 0;
-        }
-
+        return this.contacts.length == 0;
+    }
 }

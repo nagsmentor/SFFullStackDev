@@ -1,30 +1,31 @@
 <template>
+
     <lightning-card title="Parent Account Component" icon-name="standard:account">
 
-        <lightning-combobox 
-            label="Select Account" 
-            value={selectedAccountId} 
-            options={accountOptions} 
-            placeholder="Please select an Account" 
-            onchange={handleAccountChange}
-            >
+
+        <lightning-combobox
+            label="Select Account"
+            value={selectedAccountId}
+            options={accountOptions}
+            placeholder="Please select an Account"
+            onchange={handleAccountChange}>
 
         </lightning-combobox>
 
-        <h1>Email of the selected Contact is: {selectedContactEmail}</h1>
+        
+        <p>Selected Contact's Id is: {selectedContactId}</p>
+        <p>Selected Email is: {selectedEmail}</p>
 
         <c-event-handling-child-contacts
             account-id = {selectedAccountId}
-            onviewcontact = {handleViewContact}
-            >
+            onviewcontact = {handleViewContact}>
 
         </c-event-handling-child-contacts>
 
-        <c-event-handling-sibling-contacts>
+        <c-event-handling-sibling-contact>
             
-        </c-event-handling-sibling-contacts>
+        </c-event-handling-sibling-contact>
 
-
-    </lightning-card>
+    </lightning-card>    
     
 </template>
